@@ -2,9 +2,9 @@
 
 A budgeting application built using React Native.
 
-- Based files are stored in src.
+- Base files (App, Home and Login) are stored in src.
 - Reusable components are stored in src/components.
-- Pages (also classed as components) are stored in src/pages.
+- Screen components are stored in src/pages.
 - Helper content is stored in src/helper.
 
 To run on your machine simply:
