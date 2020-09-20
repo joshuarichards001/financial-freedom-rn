@@ -161,7 +161,6 @@
 				F796B7CA3C67798D74C9095B /* Pods-FinancialFreedomNative-tvOSTests.debug.xcconfig */,
 				7044F534CECD9BC85D680CD6 /* Pods-FinancialFreedomNative-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
