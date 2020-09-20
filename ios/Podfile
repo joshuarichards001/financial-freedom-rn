@@ -8,6 +8,12 @@ target 'ffreactnative' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+
+  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
+
   target 'ffreactnativeTests' do
     inherit! :complete
     # Pods for testing

@@ -1,5 +1,5 @@
-import axios, {AxiosResponse} from 'axios';
-import {baseUrl} from '../Constants';
+import axios from 'axios';
+import {baseUrl} from './Constants';
 
 export const getTransactions = async (token) => {
   try {
@@ -33,11 +33,11 @@ export const addTransaction = async (token, income, amount, category) => {
 
 export const deleteTransaction = async (token, id) => {
   try {
-    const deleteTransaction = await axios.delete(
+    const delTransaction = await axios.delete(
       `${baseUrl}/transactions/${id}/`,
       tokenConfig(token),
     );
-    return deleteTransaction;
+    return delTransaction;
   } catch (error) {
     throw new Error(error);
   }
@@ -49,6 +49,6 @@ export const tokenConfig = (token) => {
       'Content-Type': 'application/json',
     },
   };
-  config.headers['Authorization'] = `Token ${token}`;
+  config.headers['Authorization'] = `Token ${token.token}`;
   return config;
 };

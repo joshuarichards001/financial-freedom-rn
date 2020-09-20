@@ -1,114 +1,93 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, {useState, useEffect} from 'react';
+import {View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import Home from './Home';
+import LoginTab from '../pages/LoginTab';
+import {loginUser, registerUser, loginSocialUser} from '../helper/userAPI';
+import 'react-native-gesture-handler';
+import {StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
+  const [loading, setLoading] = useState(false);
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  useEffect(() => {
+    const userToken = AsyncStorage.getItem('@storage_Key');
+    userToken.then(() => {
+      // if (userToken._W !== null) {
+      //   setToken(userToken);
+      //   setIsLoggedIn(true);
+      // }
+    });
+  }, []);
 
-const App = () => {
+  const onLoginClick = (userName, password) => {
+    setLoading(true);
+    loginUser(userName, password)
+      .then(({data}) => {
+        setToken(data.auth_token);
+        AsyncStorage.setItem('@storage_Key', data.auth_token);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+        setIsLoggedIn(false);
+      });
+  };
+
+  const onGoogleClick = async (response) => {
+    setLoading(true);
+    loginSocialUser(response.accessToken)
+      .then(({data}) => {
+        setToken(data.key);
+        AsyncStorage.setItem('@storage_Key', data.key);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+        setIsLoggedIn(false);
+      });
+  };
+
+  const onRegisterClick = (email, userName, password) => {
+    setLoading(true);
+    registerUser(email, userName, password)
+      .then(() => {
+        loginUser(userName, password)
+          .then(({data}) => {
+            setToken(data.auth_token);
+            AsyncStorage.setItem('@storage_Key', data.auth_token);
+            setIsLoggedIn(true);
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log(err);
+            setIsLoggedIn(false);
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text>
-                to Change the screen.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      {isLoggedIn ? (
+        <Home token={token} />
+      ) : (
+        <LoginTab
+          onLoginClick={onLoginClick}
+          onRegisterClick={onRegisterClick}
+          loading={loading}
+          onGoogleClick={onGoogleClick}
+        />
+      )}
     </>
   );
-};
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-export default App;
+}

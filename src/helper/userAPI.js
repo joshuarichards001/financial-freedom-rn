@@ -1,12 +1,8 @@
-import axios, {AxiosResponse} from 'axios';
+import axios from 'axios';
 import {tokenConfig} from './transactionAPI';
-import {baseUrl} from '../Constants';
+import {baseUrl} from './Constants';
 
-export const registerUser = async (
-  email: string,
-  username: string,
-  password: string,
-): Promise<AxiosResponse<ApiDataType>> => {
+export const registerUser = async (email, username, password) => {
   try {
     const config = {
       headers: {
@@ -14,23 +10,14 @@ export const registerUser = async (
       },
     };
     const body = JSON.stringify({email, username, password});
-    console.log(body);
-    console.log(config);
-    const login: AxiosResponse<ApiDataType> = await axios.post(
-      baseUrl + '/auth/users/',
-      body,
-      config,
-    );
+    const login = await axios.post(baseUrl + '/auth/users/', body, config);
     return login;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export const loginUser = async (
-  username: string,
-  password: string,
-): Promise<AxiosResponse<ApiDataType>> => {
+export const loginUser = async (username, password) => {
   try {
     const config = {
       headers: {
@@ -38,7 +25,7 @@ export const loginUser = async (
       },
     };
     const body = JSON.stringify({username, password});
-    const login: AxiosResponse<ApiDataType> = await axios.post(
+    const login = await axios.post(
       baseUrl + '/auth/token/login/',
       body,
       config,
@@ -49,27 +36,20 @@ export const loginUser = async (
   }
 };
 
-export const loginSocialUser = async (
-  accesstoken,
-): Promise<AxiosResponse<ApiDataType>> => {
+export const loginSocialUser = async (accesstoken) => {
   try {
-    const login: AxiosResponse<ApiDataType> = await axios.post(
-      baseUrl + '/auth/google/',
-      {
-        access_token: accesstoken,
-      },
-    );
+    const login = await axios.post(baseUrl + '/auth/google/', {
+      access_token: accesstoken,
+    });
     return login;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export const logoutUser = async (
-  token: string,
-): Promise<AxiosResponse<ApiDataType>> => {
+export const logoutUser = async (token) => {
   try {
-    const login: AxiosResponse<ApiDataType> = await axios.post(
+    const login = await axios.post(
       baseUrl + '/auth/token/logout/',
       tokenConfig(token),
     );
@@ -79,11 +59,9 @@ export const logoutUser = async (
   }
 };
 
-export const userDetails = async (
-  token: string,
-): Promise<AxiosResponse<ApiDataType>> => {
+export const userDetails = async (token) => {
   try {
-    const login: AxiosResponse<ApiDataType> = await axios.get(
+    const login = await axios.get(
       baseUrl + '/auth/users/me/',
       tokenConfig(token),
     );
@@ -93,11 +71,9 @@ export const userDetails = async (
   }
 };
 
-export const deleteUser = async (): Promise<AxiosResponse<ApiDataType>> => {
+export const deleteUser = async () => {
   try {
-    const login: AxiosResponse<ApiDataType> = await axios.delete(
-      baseUrl + '/auth/users/me/',
-    );
+    const login = await axios.delete(baseUrl + '/auth/users/me/');
     return login;
   } catch (error) {
     throw new Error(error);
