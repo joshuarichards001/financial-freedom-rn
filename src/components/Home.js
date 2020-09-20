@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
-import {StyleSheet} from 'react-native';
+//import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BudgetTab from '../pages/BudgetTab';
@@ -70,7 +70,7 @@ export default function Home(token) {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-      <Tab.Screen
+        <Tab.Screen
           name="Add Transaction"
           children={() => (
             <AddTransactionTab addTransaction={handleAddTransaction} />
@@ -81,7 +81,6 @@ export default function Home(token) {
           children={() => (
             <TransactionsTab
               transactionList={transactionList}
-              addTransaction={handleAddTransaction}
               deleteTransaction={handleDeleteTransaction}
             />
           )}
@@ -102,4 +101,4 @@ export default function Home(token) {
   );
 }
 
-const styles = StyleSheet.create({});
+//const styles = StyleSheet.create({});

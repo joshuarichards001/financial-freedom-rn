@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Home from './Home';
 import LoginTab from '../pages/LoginTab';
 import {loginUser, registerUser, loginSocialUser} from '../helper/userAPI';
 import 'react-native-gesture-handler';
-import {StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

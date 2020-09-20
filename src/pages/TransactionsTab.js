@@ -1,14 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Balance from '../components/Balance';
-import AddTransaction from '../components/AddTransaction';
 import TransactionList from '../components/TransactionList';
 
-export default function TransactionsTab({
-  transactionList,
-  addTransaction,
-  deleteTransaction,
-}) {
+export default function TransactionsTab({transactionList, deleteTransaction}) {
   return (
     <View style={styles.screen}>
       <Balance transactionList={transactionList} />

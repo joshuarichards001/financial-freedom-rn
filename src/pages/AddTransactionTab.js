@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import AddTransaction from '../components/AddTransaction';
 
 export default function AddTransactionTab({addTransaction}) {
