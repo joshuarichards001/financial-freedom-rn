@@ -1,7 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
+/**
+ * The users balance based on their incomes and expenses
+ *
+ * @param transactionList List of users transactions
+ */
 export default function Balance({transactionList}) {
+  // calculates balance
   const calculateTotal = () => {
     var total = 0.0;
     for (const transaction of transactionList) {

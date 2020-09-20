@@ -5,6 +5,11 @@ import Login from './Login';
 import {loginUser, registerUser, loginSocialUser} from './helper/userAPI';
 import 'react-native-gesture-handler';
 
+/**
+ * This is the base class, that decided whether to display the
+ * login page or the home page. It also performs all of the user
+ * functionality (login, register, social login)
+ */
 export default function App() {
   console.disableYellowBox = true;
   const [isLoggedIn, setIsLoggedIn] = useState(false);

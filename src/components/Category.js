@@ -2,6 +2,12 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
+/**
+ * An individual category used in the budget tab.
+ *
+ * @param category the category being displayed
+ * @param amount the amount spend on the particular category
+ */
 export default function Category({category, amount}) {
   const [budget, setBudget] = useState(0);
 

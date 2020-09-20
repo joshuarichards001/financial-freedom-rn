@@ -2,6 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {VictoryPie} from 'victory-native';
 
+/**
+ * Displays a pie chart that compares the users spending on each of the categories.
+ *
+ * @param transactionList A list of the users transactions
+ */
 export default function CategoryPieChart({transactionList}) {
   let categoryMap = expenseCategories();
 

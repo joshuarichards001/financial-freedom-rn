@@ -4,6 +4,13 @@ import Balance from '../components/Balance';
 import TransactionList from '../components/TransactionList';
 import AddTransaction from '../components/AddTransaction';
 
+/**
+ * Where the add transaction form and transaction list is shown.
+ *
+ * @param transactionList the list of transactions
+ * @param deleteTransaction the deleteTransaction function
+ * @param addTransaction the addTransaction function
+ */
 export default function TransactionsTab({
   transactionList,
   deleteTransaction,

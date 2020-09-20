@@ -24,4 +24,5 @@ export const EXPENSE_CATEGORIES = [
   'Other',
 ];
 
+// link to API
 export const baseUrl = 'https://financial-freedom-api.herokuapp.com';

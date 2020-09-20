@@ -2,6 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {VictoryPie} from 'victory-native';
 
+/**
+ * Displays a pie chart comparing the users income to their expenses
+ *
+ * @param transactionList users list of transactions
+ */
 export default function FlowPieChart({transactionList}) {
   const inc = incomeExpense()[0];
   const exp = incomeExpense()[1];

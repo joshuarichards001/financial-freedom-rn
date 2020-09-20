@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import 'react-native-gesture-handler';
-//import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BudgetTab from './pages/BudgetTab';
@@ -16,17 +15,27 @@ import {
 } from './helper/transactionAPI';
 import {userDetails, logoutUser} from './helper/userAPI';
 
+/**
+ * The class where all the tabs are stored an based on where the user
+ * presses they will be routed to a different tab.
+ *
+ * @param token the users token.
+ * @param setIsLoggedIn if the user is logged in or not.
+ * @param setLoading used to turn off the loading happening in the App file.
+ */
 export default function Home({token, setIsLoggedIn, setLoading}) {
   const [userId, setUserId] = useState(-1);
   const [transactionList, setTransactionList] = useState([]);
   const Tab = createBottomTabNavigator();
   token = {token: token};
 
+  // fetches user data on render
   useEffect(() => {
     setLoading(false);
     handleFetchUserData();
   }, []);
 
+  // fetches users transactions once user data is fetched
   useEffect(() => {
     if (userId !== -1) {
       handleFetchTransactions();
@@ -69,6 +78,7 @@ export default function Home({token, setIsLoggedIn, setLoading}) {
       .catch((err) => console.log(err));
   };
 
+  // Logs out user
   const onLogoutClick = async function () {
     logoutUser(token)
       .then()
@@ -113,5 +123,3 @@ export default function Home({token, setIsLoggedIn, setLoading}) {
     </NavigationContainer>
   );
 }
-
-//const styles = StyleSheet.create({});

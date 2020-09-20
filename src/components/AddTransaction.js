@@ -4,6 +4,11 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import Picker from 'react-native-picker-select';
 import {EXPENSE_CATEGORIES, INCOME_CATEGORIES} from '../helper/Constants';
 
+/**
+ * The form used to add a transaction to a list
+ *
+ * @param addTransaction function to add transaction to users list
+ */
 export default function AddTransaction({addTransaction}) {
   const expenseColor = '#f5dfdf';
   const incomeColor = '#e5ffe7';
@@ -60,7 +65,7 @@ export default function AddTransaction({addTransaction}) {
           <TextInput
             keyboardType="number-pad"
             value={amount}
-            style={styles.input}
+            style={[styles.input, {backgroundColor: color}]}
             onChangeText={(text) => {
               setAmount(text);
             }}
@@ -74,7 +79,18 @@ export default function AddTransaction({addTransaction}) {
               value: null,
             }}
             items={categoryOptions}
-            style={pickerStyle}
+            style={{
+              inputIOS: {
+                height: 40,
+                width: 100,
+                margin: 10,
+                padding: 10,
+                borderRadius: 5,
+                borderColor: 'gray',
+                borderWidth: 1,
+                backgroundColor: color,
+              },
+            }}
             onValueChange={(itemValue) => {
               setCategory(itemValue);
             }}

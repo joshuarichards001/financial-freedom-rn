@@ -1,6 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 
+/**
+ * An individual transaction in a users list.
+ *
+ * @param transaction An individual transaction from the users list
+ * @param deleteTransaction function to delete the transaction from the list.
+ */
 export default function Transaction({transaction, deleteTransaction}) {
   return (
     <View style={styles.transaction}>

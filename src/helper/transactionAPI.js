@@ -43,6 +43,7 @@ export const deleteTransaction = async (token, id) => {
   }
 };
 
+// creates header including token and content type
 export const tokenConfig = (token) => {
   const config = {
     headers: {

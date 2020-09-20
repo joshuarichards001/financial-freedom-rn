@@ -2,6 +2,11 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {StyleSheet, View, Text} from 'react-native';
 
+/**
+ * The page which displays the logout functionality.
+ *
+ * @param onLogoutClick function for logging out
+ */
 export default function SettingsTab({onLogoutClick}) {
   return (
     <View style={styles.screen}>

@@ -2,6 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import CategoryList from '../components/CategoryList';
 
+/**
+ * Tab that displays the users budget (list of categories)
+ *
+ * @param transactionList users list of transactions (for calculation purposes)
+ */
 export default function BudgetTab({transactionList}) {
   return (
     <View style={styles.screen}>

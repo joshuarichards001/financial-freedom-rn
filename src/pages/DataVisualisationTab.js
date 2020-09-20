@@ -3,6 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import FlowPieChart from '../components/FlowPieChart';
 import CategoryPieChart from '../components/CategoryPieChart';
 
+/**
+ * Displays the pie charts that visualise the users data.
+ *
+ * @param transactionList users list of transactions.
+ */
 export default function DataVisualisationTab({transactionList}) {
   return (
     <View style={styles.screen}>

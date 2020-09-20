@@ -1,12 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Category from './Category';
 import {EXPENSE_CATEGORIES} from '../helper/Constants';
 
+/**
+ * A list of categories used for the budget.
+ *
+ * @param transactionList List of users transactions
+ */
 export default function CategoryList({transactionList}) {
   const categoryList = EXPENSE_CATEGORIES;
   const categories = expenseCategories();
 
+  // calculates how much is spent on each category
   function expenseCategories() {
     let map = new Map();
     for (let transaction of transactionList) {

@@ -36,6 +36,7 @@ export const loginUser = async (username, password) => {
   }
 };
 
+// when a user logs in using google
 export const loginSocialUser = async (accesstoken) => {
   try {
     const login = await axios.post(baseUrl + '/auth/google/', {

@@ -3,6 +3,14 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
+/**
+ * The form where the user will log into the application.
+ *
+ * @param onLoginClick when the login button is pressed.
+ * @param onRegisterClick when the register button is pressed.
+ * @param loading when the users data is loading.
+ * @param onGoogleClick when the google sign in button is pressed.
+ */
 export default function Login({
   onLoginClick,
   onRegisterClick,
