@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import 'react-native-gesture-handler';
 //import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -14,12 +15,13 @@ import {
   addTransaction,
   deleteTransaction,
 } from '../helper/transactionAPI';
-import {userDetails} from '../helper/userAPI';
+import {userDetails, logoutUser} from '../helper/userAPI';
 
-export default function Home(token) {
+export default function Home({token, setIsLoggedIn}) {
   const [userId, setUserId] = useState(-1);
   const [transactionList, setTransactionList] = useState([]);
   const Tab = createBottomTabNavigator();
+  token = {token: token};
 
   useEffect(() => {
     handleFetchUserData();
@@ -67,11 +69,24 @@ export default function Home(token) {
       .catch((err) => console.log(err));
   };
 
+  const onLogoutClick = async function () {
+    logoutUser(token)
+      .then()
+      .catch((err) => console.log(err));
+    setIsLoggedIn(false);
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      await AsyncStorage.multiRemove(keys);
+    } catch (error) {
+      console.error('Error clearing app data.');
+    }
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Add Transaction"
+          name="Add"
           children={() => (
             <AddTransactionTab addTransaction={handleAddTransaction} />
           )}
@@ -95,7 +110,10 @@ export default function Home(token) {
           name="Budget"
           children={() => <BudgetTab transactionList={transactionList} />}
         />
-        <Tab.Screen name="Settings" children={() => <SettingsTab />} />
+        <Tab.Screen
+          name="Options"
+          children={() => <SettingsTab onLogoutClick={onLogoutClick} />}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

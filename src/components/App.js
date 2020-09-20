@@ -6,6 +6,7 @@ import {loginUser, registerUser, loginSocialUser} from '../helper/userAPI';
 import 'react-native-gesture-handler';
 
 export default function App() {
+  console.disableYellowBox = true;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,10 +14,10 @@ export default function App() {
   useEffect(() => {
     const userToken = AsyncStorage.getItem('@storage_Key');
     userToken.then(() => {
-      // if (userToken._W !== null) {
-      //   setToken(userToken);
-      //   setIsLoggedIn(true);
-      // }
+      if (userToken._W !== null) {
+        setToken(userToken._W);
+        setIsLoggedIn(true);
+      }
     });
   }, []);
 
@@ -35,9 +36,9 @@ export default function App() {
       });
   };
 
-  const onGoogleClick = async (response) => {
+  const onGoogleClick = (accessToken) => {
     setLoading(true);
-    loginSocialUser(response.accessToken)
+    loginSocialUser(accessToken)
       .then(({data}) => {
         setToken(data.key);
         AsyncStorage.setItem('@storage_Key', data.key);
@@ -75,7 +76,7 @@ export default function App() {
   return (
     <>
       {isLoggedIn ? (
-        <Home token={token} />
+        <Home token={token} setIsLoggedIn={setIsLoggedIn} />
       ) : (
         <LoginTab
           onLoginClick={onLoginClick}

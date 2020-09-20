@@ -15,12 +15,12 @@ export default function AddTransaction({addTransaction}) {
   useEffect(() => {
     var categoryOptionsList = [];
     if (income) {
-      INCOME_CATEGORIES.map((c) => {
-        categoryOptionsList.push(<Picker.Item value={c} label={c} />);
+      INCOME_CATEGORIES.map((c, i) => {
+        categoryOptionsList.push(<Picker.Item key={i} value={c} label={c} />);
       });
     } else {
-      EXPENSE_CATEGORIES.map((c) => {
-        categoryOptionsList.push(<Picker.Item value={c} label={c} />);
+      EXPENSE_CATEGORIES.map((c, i) => {
+        categoryOptionsList.push(<Picker.Item key={i} value={c} label={c} />);
       });
     }
     setCategoryOptions(categoryOptionsList);

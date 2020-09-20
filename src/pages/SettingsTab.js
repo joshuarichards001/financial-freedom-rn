@@ -1,10 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 
-export default function SettingsTab() {
+export default function SettingsTab({onLogoutClick}) {
   return (
     <View style={styles.screen}>
-      <Text>Add Logout Button Here</Text>
+      <Text>Options</Text>
+      <Button
+        title="Logout"
+        onPress={() => {
+          onLogoutClick();
+        }}
+      />
     </View>
   );
 }

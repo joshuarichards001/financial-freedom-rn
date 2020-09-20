@@ -161,7 +161,6 @@
 				588B28D7FE3C16C282BE9048 /* Pods-ffreactnative-tvOSTests.debug.xcconfig */,
 				34C2ABCF7269A6D453D0C04C /* Pods-ffreactnative-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

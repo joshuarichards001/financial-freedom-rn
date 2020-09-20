@@ -31,7 +31,17 @@ export default function CategoryPieChart({transactionList}) {
   return (
     <View style={{borderWidth: 1}}>
       <VictoryPie
-        colorScale={['red', 'green', 'gold', 'cyan', 'navy']}
+        colorScale={[
+          'red',
+          'green',
+          'gold',
+          'cyan',
+          'navy',
+          'teal',
+          'maroon',
+          'purple',
+          'pink',
+        ]}
         data={categoryMap}
         width={250}
         height={250}

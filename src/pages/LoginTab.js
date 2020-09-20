@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 export default function LoginTab({
   onLoginClick,
@@ -11,6 +12,24 @@ export default function LoginTab({
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [showRegister, setShowRegister] = useState(false);
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.signIn();
+      const tokens = await GoogleSignin.getTokens();
+      onGoogleClick(tokens.accessToken);
+    } catch (error) {
+      console.log(error.statusCodes);
+    }
+  };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      iosClientId:
+        '551797952328-4io9c9sl5un9c8ouoce1ct7c0mkjmj4h.apps.googleusercontent.com',
+    });
+  }, []);
 
   return (
     <View style={styles.screen}>
@@ -65,9 +84,15 @@ export default function LoginTab({
           onLoginClick('a', 'a');
         }}
       />
-      {loading ? (
+      <GoogleSigninButton
+        style={{width: 192, height: 48}}
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={signIn}
+      />
+      {/* {loading ? (
         <Text>Content Is Loading, this may take a minute...</Text>
-      ) : null}
+      ) : null} */}
     </View>
   );
 }
