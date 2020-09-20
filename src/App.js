@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import Home from './Home';
-import LoginTab from '../pages/LoginTab';
-import {loginUser, registerUser, loginSocialUser} from '../helper/userAPI';
+import Login from './Login';
+import {loginUser, registerUser, loginSocialUser} from './helper/userAPI';
 import 'react-native-gesture-handler';
 
 export default function App() {
@@ -76,9 +76,13 @@ export default function App() {
   return (
     <>
       {isLoggedIn ? (
-        <Home token={token} setIsLoggedIn={setIsLoggedIn} />
+        <Home
+          token={token}
+          setIsLoggedIn={setIsLoggedIn}
+          setLoading={setLoading}
+        />
       ) : (
-        <LoginTab
+        <Login
           onLoginClick={onLoginClick}
           onRegisterClick={onRegisterClick}
           loading={loading}

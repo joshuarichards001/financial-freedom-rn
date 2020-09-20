@@ -1,12 +1,8 @@
-rootProject.name = 'ffreactnative'
-include ':react-native-svg'
-project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
-include ':@react-native-community_picker'
-project(':@react-native-community_picker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/picker/android')
-include ':@react-native-community_picker'
-project(':@react-native-community_picker').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/picker/android')
-include ':react-native-google-signin'
-project(':react-native-google-signin').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-signin/android')
+rootProject.name = 'FinancialFreedomNative'
+include ':@react-native-community_async-storage'
+project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
+include ':@react-native-community_async-storage'
+project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 include ':@react-native-community_async-storage'
 project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)

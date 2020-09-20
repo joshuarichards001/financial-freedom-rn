@@ -1,5 +1,4 @@
 export const INCOME_CATEGORIES = [
-  '',
   'Paycheck',
   'Student Loans',
   'Gift',
@@ -10,7 +9,6 @@ export const INCOME_CATEGORIES = [
 ];
 
 export const EXPENSE_CATEGORIES = [
-  '',
   'Housing',
   'Transportation',
   'Food',

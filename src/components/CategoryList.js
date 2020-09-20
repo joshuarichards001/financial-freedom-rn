@@ -26,8 +26,8 @@ export default function CategoryList({transactionList}) {
   }
 
   return (
-    <View>
-      {categoryList.slice(1).map((category) => {
+    <View style={styles.section}>
+      {categoryList.map((category) => {
         for (let [key, value] of categories) {
           if (key === category) {
             return (
@@ -41,4 +41,8 @@ export default function CategoryList({transactionList}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  section: {
+    borderWidth: 1,
+  },
+});

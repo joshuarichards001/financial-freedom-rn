@@ -6,8 +6,10 @@ import CategoryPieChart from '../components/CategoryPieChart';
 export default function DataVisualisationTab({transactionList}) {
   return (
     <View style={styles.screen}>
-      <Text>Data</Text>
+      <Text style={styles.title}>Data</Text>
+      <Text style={styles.text}>Income vs. Expense</Text>
       <FlowPieChart transactionList={transactionList} />
+      <Text style={styles.text}>Categories</Text>
       <CategoryPieChart transactionList={transactionList} />
     </View>
   );
@@ -15,9 +17,16 @@ export default function DataVisualisationTab({transactionList}) {
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 70,
+    marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+  },
+  title: {
+    fontSize: 40,
+    marginBottom: 20,
+  },
+  text: {
+    fontSize: 20,
+    marginTop: 20,
   },
 });

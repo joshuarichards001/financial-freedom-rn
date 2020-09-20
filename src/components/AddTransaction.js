@@ -1,6 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState, useRef} from 'react';
-import {StyleSheet, Text, View, Button, TextInput, Picker} from 'react-native';
+import {Button} from 'react-native-elements';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
+import Picker from 'react-native-picker-select';
 import {EXPENSE_CATEGORIES, INCOME_CATEGORIES} from '../helper/Constants';
 
 export default function AddTransaction({addTransaction}) {
@@ -15,22 +16,29 @@ export default function AddTransaction({addTransaction}) {
   useEffect(() => {
     var categoryOptionsList = [];
     if (income) {
-      INCOME_CATEGORIES.map((c, i) => {
-        categoryOptionsList.push(<Picker.Item key={i} value={c} label={c} />);
+      INCOME_CATEGORIES.map((c) => {
+        categoryOptionsList.push({
+          label: c,
+          value: c,
+        });
       });
     } else {
-      EXPENSE_CATEGORIES.map((c, i) => {
-        categoryOptionsList.push(<Picker.Item key={i} value={c} label={c} />);
+      EXPENSE_CATEGORIES.map((c) => {
+        categoryOptionsList.push({
+          label: c,
+          value: c,
+        });
       });
     }
+    console.log(categoryOptionsList);
     setCategoryOptions(categoryOptionsList);
   }, [income]);
 
   return (
-    <View>
+    <View styles={styles.screen}>
       <View style={{flexDirection: 'row'}}>
         <Button
-          style={{color: incomeColor}}
+          style={styles.button}
           title="Income"
           onPress={() => {
             setColor(incomeColor);
@@ -38,7 +46,7 @@ export default function AddTransaction({addTransaction}) {
           }}
         />
         <Button
-          style={{color: expenseColor}}
+          style={styles.button}
           title="Expense"
           onPress={() => {
             setColor(expenseColor);
@@ -46,26 +54,36 @@ export default function AddTransaction({addTransaction}) {
           }}
         />
       </View>
-      <Text>Amount</Text>
-      <TextInput
-        keyboardType="number-pad"
-        value={amount}
-        style={{backgroundColor: color}}
-        onChangeText={(text) => {
-          setAmount(text);
-        }}
-      />
-      <Text>Category</Text>
-      <Picker
-        selectedValue={category}
-        style={styles.picker}
-        onValueChange={(itemValue) => {
-          setCategory(itemValue);
-        }}>
-        {categoryOptions}
-      </Picker>
+      <View style={{flexDirection: 'row'}}>
+        <View>
+          <Text>Amount</Text>
+          <TextInput
+            keyboardType="number-pad"
+            value={amount}
+            style={styles.input}
+            onChangeText={(text) => {
+              setAmount(text);
+            }}
+          />
+        </View>
+        <View>
+          <Text>Category</Text>
+          <Picker
+            placeholder={{
+              label: 'Select a Category...',
+              value: null,
+            }}
+            items={categoryOptions}
+            style={pickerStyle}
+            onValueChange={(itemValue) => {
+              setCategory(itemValue);
+            }}
+          />
+        </View>
+      </View>
       <Button
         title="Add Transaction"
+        style={styles.addButton}
         onPress={() => {
           addTransaction(income, amount, category);
           setAmount(0.0);
@@ -76,4 +94,40 @@ export default function AddTransaction({addTransaction}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 95,
+    borderRadius: 5,
+    margin: 5,
+  },
+  addButton: {
+    width: 200,
+    borderRadius: 5,
+    margin: 5,
+    marginBottom: 40,
+  },
+  input: {
+    height: 40,
+    width: 100,
+    margin: 10,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+});
+
+const pickerStyle = {
+  inputIOS: {
+    height: 40,
+    width: 100,
+    margin: 10,
+    padding: 10,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+};

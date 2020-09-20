@@ -4,8 +4,10 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 export default function Transaction({transaction, deleteTransaction}) {
   return (
     <View style={styles.transaction}>
-      <Text>
-        {transaction.category} {transaction.amount}
+      <Text style={styles.text}>{transaction.category}</Text>
+      <Text
+        style={{color: transaction.income ? 'green' : 'red', paddingTop: 8}}>
+        {transaction.amount}
       </Text>
       <Button
         title="X"
@@ -20,6 +22,13 @@ export default function Transaction({transaction, deleteTransaction}) {
 const styles = StyleSheet.create({
   transaction: {
     flexDirection: 'row',
-    borderWidth: 1,
+    justifyContent: 'space-between',
+    width: 200,
+  },
+  text: {
+    paddingTop: 8,
+    paddingLeft: 8,
+    textAlign: 'center',
+    fontSize: 15,
   },
 });

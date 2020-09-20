@@ -5,7 +5,7 @@ import CategoryList from '../components/CategoryList';
 export default function BudgetTab({transactionList}) {
   return (
     <View style={styles.screen}>
-      <Text>Budget</Text>
+      <Text style={styles.title}>Budget</Text>
       <CategoryList transactionList={transactionList} />
     </View>
   );
@@ -13,9 +13,12 @@ export default function BudgetTab({transactionList}) {
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 70,
+    marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+  },
+  title: {
+    fontSize: 40,
+    marginBottom: 20,
   },
 });

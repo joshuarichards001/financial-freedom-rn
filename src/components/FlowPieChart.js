@@ -22,14 +22,14 @@ export default function FlowPieChart({transactionList}) {
   }
 
   return (
-    <View style={{borderWidth: 1}}>
+    <View>
       <VictoryPie
-        colorScale={['green', 'red', 'gold', 'cyan', 'navy']}
+        colorScale={['green', 'red']}
         data={[
           {x: 'Income', y: inc},
           {x: 'Expense', y: exp},
         ]}
-        width={250}
+        width={400}
         height={250}
       />
     </View>

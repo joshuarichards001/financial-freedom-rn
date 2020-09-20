@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, TextInput, Button, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
-export default function LoginTab({
+export default function Login({
   onLoginClick,
   onRegisterClick,
   loading,
@@ -33,7 +34,11 @@ export default function LoginTab({
 
   return (
     <View style={styles.screen}>
-      {showRegister ? <Text>Register</Text> : <Text>Login</Text>}
+      {showRegister ? (
+        <Text style={styles.title}>Register</Text>
+      ) : (
+        <Text style={styles.title}>Login</Text>
+      )}
       {showRegister ? <Text>Email</Text> : null}
       {showRegister ? (
         <TextInput
@@ -54,45 +59,48 @@ export default function LoginTab({
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button
-        title="Login"
-        onPress={() => {
-          if (!showRegister) {
-            onLoginClick(userName, password);
-          } else {
-            setShowRegister(false);
-          }
-        }}
-      />
-      <Button
-        title="Register"
-        onPress={() => {
-          if (
-            (!showRegister || email.length,
-            userName.length,
-            password.length === 0)
-          ) {
-            setShowRegister(true);
-          } else {
-            onRegisterClick(email, userName, password);
-          }
-        }}
-      />
+      <View style={{flexDirection: 'row', marginTop: 20}}>
+        <Button
+          title="Login"
+          style={styles.button}
+          onPress={() => {
+            if (!showRegister) {
+              onLoginClick(userName, password);
+            } else {
+              setShowRegister(false);
+            }
+          }}
+        />
+        <Button
+          title="Register"
+          style={styles.button}
+          onPress={() => {
+            if (
+              (!showRegister || email.length,
+              userName.length,
+              password.length === 0)
+            ) {
+              setShowRegister(true);
+            } else {
+              onRegisterClick(email, userName, password);
+            }
+          }}
+        />
+      </View>
       <Button
         title="Login As Guest"
+        style={styles.guestButton}
         onPress={() => {
           onLoginClick('a', 'a');
         }}
       />
       <GoogleSigninButton
-        style={{width: 192, height: 48}}
+        style={{width: 210, height: 50, margin: 2, marginBottom: 30}}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         onPress={signIn}
       />
-      {/* {loading ? (
-        <Text>Content Is Loading, this may take a minute...</Text>
-      ) : null} */}
+      {loading ? <Text>Content Is Loading...</Text> : null}
     </View>
   );
 }
@@ -103,9 +111,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontSize: 40,
+    marginBottom: 20,
+  },
+  button: {
+    width: 95,
+    borderRadius: 5,
+    margin: 5,
+  },
+  guestButton: {
+    width: 200,
+    borderRadius: 5,
+    margin: 5,
+  },
   input: {
     height: 40,
     width: 200,
+    marginBottom: 10,
+    borderRadius: 5,
     borderColor: 'gray',
     borderWidth: 1,
   },

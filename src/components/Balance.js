@@ -13,9 +13,16 @@ export default function Balance({transactionList}) {
 
   return (
     <View>
-      <Text>Balance: ${calculateTotal(transactionList)}</Text>
+      <Text style={styles.text}>
+        Balance: ${calculateTotal(transactionList)}
+      </Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 30,
+    marginBottom: 20,
+  },
+});

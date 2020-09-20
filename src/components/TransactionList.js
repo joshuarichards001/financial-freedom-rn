@@ -4,7 +4,7 @@ import Transaction from './Transaction';
 
 export default function TransactionList({transactionList, deleteTransaction}) {
   return (
-    <View>
+    <View style={styles.section}>
       {transactionList.map((transaction) => (
         <Transaction
           key={transaction.id}
@@ -16,4 +16,8 @@ export default function TransactionList({transactionList, deleteTransaction}) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  section: {
+    borderWidth: 1,
+  },
+});

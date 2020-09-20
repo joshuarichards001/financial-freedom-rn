@@ -5,25 +5,25 @@ import 'react-native-gesture-handler';
 //import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import BudgetTab from '../pages/BudgetTab';
-import DataVisualisationTab from '../pages/DataVisualisationTab';
-import TransactionsTab from '../pages/TransactionsTab';
-import SettingsTab from '../pages/SettingsTab';
-import AddTransactionTab from '../pages/AddTransactionTab';
+import BudgetTab from './pages/BudgetTab';
+import DataVisualisationTab from './pages/DataVisualisationTab';
+import TransactionsTab from './pages/TransactionsTab';
+import SettingsTab from './pages/SettingsTab';
 import {
   getTransactions,
   addTransaction,
   deleteTransaction,
-} from '../helper/transactionAPI';
-import {userDetails, logoutUser} from '../helper/userAPI';
+} from './helper/transactionAPI';
+import {userDetails, logoutUser} from './helper/userAPI';
 
-export default function Home({token, setIsLoggedIn}) {
+export default function Home({token, setIsLoggedIn, setLoading}) {
   const [userId, setUserId] = useState(-1);
   const [transactionList, setTransactionList] = useState([]);
   const Tab = createBottomTabNavigator();
   token = {token: token};
 
   useEffect(() => {
+    setLoading(false);
     handleFetchUserData();
   }, []);
 
@@ -86,15 +86,10 @@ export default function Home({token, setIsLoggedIn}) {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Add"
-          children={() => (
-            <AddTransactionTab addTransaction={handleAddTransaction} />
-          )}
-        />
-        <Tab.Screen
           name="Transactions"
           children={() => (
             <TransactionsTab
+              addTransaction={handleAddTransaction}
               transactionList={transactionList}
               deleteTransaction={handleDeleteTransaction}
             />

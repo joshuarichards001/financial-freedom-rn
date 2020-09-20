@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {Button} from 'react-native-elements';
+import {StyleSheet, View, Text} from 'react-native';
 
 export default function SettingsTab({onLogoutClick}) {
   return (
     <View style={styles.screen}>
-      <Text>Options</Text>
+      <Text style={styles.title}>Options</Text>
       <Button
         title="Logout"
         onPress={() => {
@@ -17,8 +18,12 @@ export default function SettingsTab({onLogoutClick}) {
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 70,
+    marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: 40,
+    marginBottom: 50,
   },
 });

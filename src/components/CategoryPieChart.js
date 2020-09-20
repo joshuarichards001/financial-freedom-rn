@@ -29,7 +29,7 @@ export default function CategoryPieChart({transactionList}) {
   }
 
   return (
-    <View style={{borderWidth: 1}}>
+    <View>
       <VictoryPie
         colorScale={[
           'red',

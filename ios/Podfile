@@ -3,20 +3,14 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'ffreactnative' do
+target 'FinancialFreedomNative' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
-  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
-
-  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
-
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
-
-  target 'ffreactnativeTests' do
+  target 'FinancialFreedomNativeTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -31,10 +25,10 @@ target 'ffreactnative' do
   end
 end
 
-target 'ffreactnative-tvOS' do
-  # Pods for ffreactnative-tvOS
+target 'FinancialFreedomNative-tvOS' do
+  # Pods for FinancialFreedomNative-tvOS
 
-  target 'ffreactnative-tvOSTests' do
+  target 'FinancialFreedomNative-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
